@@ -1,11 +1,27 @@
+import time
 import boto3
-import botocore.exceptions
+from boto3.dynamodb.conditions import Attr
+from botocore.exceptions import ClientError
 
-def create_session():
+def create_session(session=None):
     session_table = 'epf-sessions'
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table(session_table)
     
+    try:
+        table.put_item(
+            Item={
+                    'sessionId': session,
+                    'timestamp': str(time.time())
+                },
+            ConditionExpression=Attr('sessionId').ne(session)
+            )
+    except ClientError as e:
+        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+            print('Session {} already exists'.format(session))
+        else:
+            raise
+
 
 def create_table(tablename=None):
     dynamodb = boto3.resource('dynamodb')
@@ -32,12 +48,12 @@ def create_table(tablename=None):
 
         # Wait until the table exists.
         table.meta.client.get_waiter('table_exists').wait(TableName=tablename)
-    except botocore.exceptions.ClientError:
+    except ClientError:
         print("Table already exists")
 
 if __name__ == '__main__':
-    print("Creating Table")
-    create_table(tablename='epf-sessions')
+    print("Creating Session")
+    create_session(session='test')
 
 
 
