@@ -1,0 +1,18 @@
+#top level item. 
+{
+    "sessionId": "1234-5678-9101",
+    "timestamp": "epoch stamp"
+    "postIds" [ '1', '2', '3', '4', '5' ]
+}
+
+#post item
+{ 
+    "postId": '1',
+    "timestamp": "stamp",
+    "content":  "this is an example comment",
+    "column": "positive",
+    "comments": [
+                    { "timestamp": "stamp", 
+                      "content": "this is a sub comment" }
+                ]
+}   
