@@ -1,24 +1,25 @@
 from flask import Flask
 app = Flask(__name__)
 
-import dynamodb
+from database import dynamodb
 
 @app.route("/")
 def home():
     return "Welcome to Ex-Post-Facto"
 
-@app.route("/sessions/<sessionname>")
-def create_session(sessionname):
-    created = dynamodb.SessionTable().create_session(session=sessionname)
+@app.route("/board/<boardname>")
+@app.route("/session/delete/<boardname>")
+def create_board(boardname):
+    created = dynamodb.Boards().create_board(board=boardname)
     if created:
-        return "Session {} was created".format(sessionname)
+        return "Board {} was created".format(boardname)
     else:
-        return "Failed creating {} session, likely duplicate name".format(sessionname)
+        return "Failed creating {} board, likely duplicate name".format(boardname)
 
-@app.route("/sessions")
-def list_sessions():
-    sessions = dynamodb.SessionTable().list_sessions()
-    return str(sessions)
+@app.route("/boards")
+def list_boards():
+    boards = dynamodb.Boards().list_boards()
+    return str(boards)
 
 if __name__ == "__main__":
     app.run()

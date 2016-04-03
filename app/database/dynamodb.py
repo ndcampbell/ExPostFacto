@@ -3,34 +3,34 @@ import boto3
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
-class SessionTable:
+class Boards:
     def __init__(self):
-        self.tablename = 'epf-sessions'
+        self.tablename = 'epf-boards'
         self.resource = boto3.resource('dynamodb')
         self.table = self.resource.Table(self.tablename)
 
-    def create_session(self, session=None):
+    def create_board(self, board=None):
         try:
             self.table.put_item(
                 Item={
-                        'sessionId': session,
+                        'boardId': board,
                         'timestamp': str(time.time())
                     },
-                ConditionExpression=Attr('sessionId').ne(session)
+                ConditionExpression=Attr('boardId').ne(board)
                 )
             return True
         except ClientError as e:
             if e.response['Error']['Code'] == "ConditionalCheckFailedException":
-                print('Session {} already exists'.format(session))
+                print('Board {} already exists'.format(board))
             else:
                 raise
             return False
 
-    def list_sessions(self):
-        self.sessionlist = []
+    def list_boards(self):
+        self.boardlist = []
         for item in self.table.scan()['Items']:
-            self.sessionlist.append(item['sessionId'])
-        return self.sessionlist
+            self.boardlist.append(item['boardId'])
+        return self.boardlist
 
     def create_table(self, tablename=None):
         try:
@@ -38,13 +38,13 @@ class SessionTable:
                         TableName = self.tablename,
                         KeySchema = [ 
                             {
-                                'AttributeName': 'sessionId',
+                                'AttributeName': 'boardId',
                                 'KeyType': 'HASH'
                            }
                         ],
                         AttributeDefinitions=[
                             {
-                                'AttributeName': 'sessionId',
+                                'AttributeName': 'boardId',
                                 'AttributeType': 'S'
                             }
                         ],
@@ -57,11 +57,10 @@ class SessionTable:
             # Wait until the table exists.
             table.meta.client.get_waiter('table_exists').wait(TableName=self.tablename)
         except ClientError:
-            print("Table already exists")
+            print("Table {} already exists".format(self.tablename))
 
 if __name__ == '__main__':
-    st = SessionTable()
-    st.list_sessions()
-    print(st.sessionlist)
+    boards = Boards()
+    boards.create_table(tablename='epf-boards')
 
 
