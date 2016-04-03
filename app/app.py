@@ -21,6 +21,19 @@ def create_board(group, board):
         boards=dynamodb.Boards().list_boards(group=group)
         return str(boards)
 
+@app.route("/<group>", methods=['GET'])
+def list_boards(group):
+    boards=dynamodb.Boards().list_boards(group=group)
+    return str(boards)
+
+@app.route("/<group>/<board>/post", methods=['POST'])
+def create_post(group, board):
+    return
+
+@app.route("/<group>/<board>/<postid>/comment", methods=['POST'])
+def create_comment(group, board, postid):
+    return
+
 
 if __name__ == "__main__":
     app.run()
