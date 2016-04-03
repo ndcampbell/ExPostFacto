@@ -80,6 +80,25 @@ class Posts:
         self.resource = boto3.resource('dynamodb')
         self.table = self.resource.Table(self.tablename)
 
+    def create_post(self, content='', groupboard=None):
+        postId = 0 
+        try:
+            self.table.put_item(
+                Item={
+                        'groupboardId': groupboard,
+                        'postId': postId,
+                        'content': content,
+                        'timestamp': str(time.time())
+                    },
+                ConditionExpression=Attr('groupboardId').ne(board) & Attr('postId').ne(group)
+                )
+            return True
+        except ClientError as e:
+            if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+                print('Board {} already exists with {} group'.format(board, group))
+            else:
+                raise
+            return False
 
     def create_table(self):
         try:
@@ -87,22 +106,22 @@ class Posts:
                         TableName = self.tablename,
                         KeySchema = [ 
                             {
-                                'AttributeName': 'postId',
+                                'AttributeName': 'groupboardId',
                                 'KeyType': 'HASH'
                             },
                             {
-                                'AttributeName': 'groupboardId',
+                                'AttributeName': 'postId',
                                 'KeyType': 'RANGE'
                                 
                            }
                         ],
                         AttributeDefinitions=[
                             {
-                                'AttributeName': 'postId',
+                                'AttributeName': 'groupboardId',
                                 'AttributeType': 'S'
                             },
                             {
-                                'AttributeName': 'groupboardId',
+                                'AttributeName': 'postId',
                                 'AttributeType': 'S'
                             }
                         ],
