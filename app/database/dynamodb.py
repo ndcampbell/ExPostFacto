@@ -1,4 +1,6 @@
 import time
+import uuid
+
 import boto3
 from boto3.dynamodb.conditions import Attr, Key
 from botocore.exceptions import ClientError
@@ -80,8 +82,9 @@ class Posts:
         self.resource = boto3.resource('dynamodb')
         self.table = self.resource.Table(self.tablename)
 
-    def create_post(self, content='', groupboard=None):
-        postId = 0 
+    def upsert_post(self, content='', groupboard=None, postId=None):
+        if not postId:
+            postId = uuid.uuid1()
         try:
             self.table.put_item(
                 Item={

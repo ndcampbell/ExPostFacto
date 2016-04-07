@@ -28,6 +28,19 @@ def list_boards(group):
 
 @app.route("/<group>/<board>/post", methods=['POST'])
 def create_post(group, board):
+    '''' Post Data: { 'postId': id, 'content': content }'''
+    data = request.get_json()
+    content = data['content']
+    groupboard = group + board
+
+    try:
+        postId = data['postId']
+    except KeyError:
+        postId = None
+
+    dynamodb.Posts().upsert_post(content=content,
+                                 groupboard=groupboard,
+                                 postId=postId)
     return
 
 @app.route("/<group>/<board>/<postid>/comment", methods=['POST'])
