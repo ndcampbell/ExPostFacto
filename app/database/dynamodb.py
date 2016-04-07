@@ -76,24 +76,43 @@ class Boards:
 
 
 class Posts:
+    def list_boards(self, group=None):
+        self.boardlist = []
+        query_r = self.table.query(
+            KeyConditionExpression=Key('groupId').eq(group)
+            )
+        for item in query_r['Items']:
+            self.boardlist.append(item['boardId'])
+        return self.boardlist
 
     def __init__(self):
         self.tablename = 'epf-posts'
         self.resource = boto3.resource('dynamodb')
         self.table = self.resource.Table(self.tablename)
 
-    def upsert_post(self, content='', groupboard=None, postId=None):
-        if not postId:
+    def list_posts(self, groupboard=None):
+        self.postlist = []
+        query_r = self.table.query(
+            KeyConditionExpression=Key('groupboardId').eq(groupboard)
+            )
+        for item in query_r['Items']:
+            self.postlist.append(item)
+        return self.postlist
+
+    def upsert_post(self, data=None):
+        try:
+            postId = data['postId']
+        except KeyError:
             postId = str(uuid.uuid1())
+            data['postId'] = postId
+
+        data['timestamp'] = str(time.time())
+
         try:
             self.table.put_item(
-                Item={
-                        'groupboardId': groupboard,
-                        'postId': postId,
-                        'content': content,
-                        'timestamp': str(time.time())
-                    },
-                ConditionExpression=Attr('groupboardId').ne(groupboard) & Attr('postId').ne(postId)
+                Item=data,
+                ConditionExpression=Attr('groupboardId').ne(data['groupboardId'])
+                                    & Attr('postId').ne(data['postId'])
                 )
             return postId
         except ClientError as e:
