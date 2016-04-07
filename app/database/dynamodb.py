@@ -7,12 +7,19 @@ from botocore.exceptions import ClientError
 
 
 class Boards:
+    """ Handles functions of Boards for DynamoDB"""
     def __init__(self):
         self.tablename = 'epf-boards'
         self.resource = boto3.resource('dynamodb')
         self.table = self.resource.Table(self.tablename)
 
     def create_board(self, group=None, board=None):
+        """
+        Creates a board in DynamoDB
+        :param group: The name of the group to nest the board under
+        :param board: The name of the board
+        :return: returns true or false of board successfully created
+        """
         try:
             self.table.put_item(
                 Item={
@@ -31,6 +38,11 @@ class Boards:
             return False
 
     def list_boards(self, group=None):
+        """
+        Returns a list of all boards for a specific group
+        :param group: the name of the group to search boards for
+        :return: a list of names of boards
+        """
         self.boardlist = []
         query_r = self.table.query(
             KeyConditionExpression=Key('groupId').eq(group)
@@ -40,6 +52,10 @@ class Boards:
         return self.boardlist
 
     def create_table(self):
+        """
+        Creates the table in DynamoDB
+        :return:
+        """
         try:
             table = self.resource.create_table(
                         TableName = self.tablename,
@@ -76,14 +92,9 @@ class Boards:
 
 
 class Posts:
-    def list_boards(self, group=None):
-        self.boardlist = []
-        query_r = self.table.query(
-            KeyConditionExpression=Key('groupId').eq(group)
-            )
-        for item in query_r['Items']:
-            self.boardlist.append(item['boardId'])
-        return self.boardlist
+    """
+    Handles all post related functions for DynamoDB
+    """
 
     def __init__(self):
         self.tablename = 'epf-posts'
@@ -91,6 +102,11 @@ class Posts:
         self.table = self.resource.Table(self.tablename)
 
     def list_posts(self, groupboard=None):
+        """
+        Returns a list of all posts for a specific group and board
+        :param groupboard: This is a combination string of group + board
+        :return: returns list of all dynamoDB post items for groupboard
+        """
         self.postlist = []
         query_r = self.table.query(
             KeyConditionExpression=Key('groupboardId').eq(groupboard)
@@ -100,10 +116,16 @@ class Posts:
         return self.postlist
 
     def upsert_post(self, data=None):
+        """
+        Inserts or updates a post in DynamoDB
+        :param data: Dictionary of all values to story in DynamoDB for Posts
+        :return: postId of upserted post
+        """
         try:
             postId = data['postId']
         except KeyError:
-            postId = str(uuid.uuid1())
+            #if postId does not exist, generate using uuid4, random value
+            postId = str(uuid.uuid4())
             data['postId'] = postId
 
         data['timestamp'] = str(time.time())
@@ -117,12 +139,16 @@ class Posts:
             return postId
         except ClientError as e:
             if e.response['Error']['Code'] == "ConditionalCheckFailedException":
-                print('Board {} already exists with {} group'.format(board, group))
+                print('Post already exists on this board')
             else:
                 raise
             return False
 
     def create_table(self):
+        """
+        Creates DynamoDB post table
+        :return:
+        """
         try:
             table = self.resource.create_table(
                         TableName = self.tablename,
