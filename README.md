@@ -1,6 +1,6 @@
-# ex-post-facto - A retroactive application 
+# ex-post-facto - A retrospective application 
 
-This will be a small web app to provide a board for team retroactives.
+This will be a small web app to provide a board for team retrospectives.
 
 - Python3
 - Flask
