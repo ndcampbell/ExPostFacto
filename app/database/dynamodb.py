@@ -84,7 +84,7 @@ class Posts:
 
     def upsert_post(self, content='', groupboard=None, postId=None):
         if not postId:
-            postId = uuid.uuid1()
+            postId = str(uuid.uuid1())
         try:
             self.table.put_item(
                 Item={
@@ -93,9 +93,9 @@ class Posts:
                         'content': content,
                         'timestamp': str(time.time())
                     },
-                ConditionExpression=Attr('groupboardId').ne(board) & Attr('postId').ne(group)
+                ConditionExpression=Attr('groupboardId').ne(groupboard) & Attr('postId').ne(postId)
                 )
-            return True
+            return postId
         except ClientError as e:
             if e.response['Error']['Code'] == "ConditionalCheckFailedException":
                 print('Board {} already exists with {} group'.format(board, group))

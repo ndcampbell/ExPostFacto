@@ -38,10 +38,10 @@ def create_post(group, board):
     except KeyError:
         postId = None
 
-    dynamodb.Posts().upsert_post(content=content,
+    postId = dynamodb.Posts().upsert_post(content=content,
                                  groupboard=groupboard,
                                  postId=postId)
-    return
+    return str(postId)
 
 @app.route("/<group>/<board>/<postid>/comment", methods=['POST'])
 def create_comment(group, board, postid):
