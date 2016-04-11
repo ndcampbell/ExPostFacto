@@ -144,6 +144,24 @@ class Posts:
                 raise
             return False
 
+    def vote(self, groupboardId=None, postId=None, addpoint=True):
+        votepoint = 1
+        response = self.table.update_item(
+            Key={
+                'groupboardId': groupboardId,
+                'postId': postId
+            },
+            UpdateExpression="set votes = :v",
+            ExpressionAttributeValues={
+            ':v': int(votepoint)
+            },
+            ReturnValues="UPDATED_NEW"
+        )
+        return response
+
+    def get_votes(self, groupboardId=None, postId=None):
+        return
+
     def create_table(self):
         """
         Creates DynamoDB post table

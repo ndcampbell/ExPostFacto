@@ -47,6 +47,22 @@ def list_posts(group, board):
 def create_comment(group, board, postid):
     return
 
+@app.route("/<group>/<board>/vote",
+           methods=['POST', 'DELETE'])
+def vote(group, board):
+    postid = request.args.get('postid')
+    if not postid:
+        return "Problem getting postId"
+
+    if request.method == 'POST':
+        addpoint = True
+    elif request.method == 'DELETE':
+        addpoint = False
+
+    resp = dynamodb.Posts().vote(postId=postid,
+                                 groupboardId= group+board,
+                                 addpoint=addpoint)
+    return str(resp)
 
 if __name__ == "__main__":
     app.run()
