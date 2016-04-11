@@ -145,7 +145,12 @@ class Posts:
             return False
 
     def vote(self, groupboardId=None, postId=None, addpoint=True):
-        votepoint = 1
+        cur_count = self.get_votes(groupboardId=groupboardId, postId=postId)
+        if addpoint:
+            votepoint = cur_count + 1
+        else:
+            votepoint = cur_count - 1
+
         response = self.table.update_item(
             Key={
                 'groupboardId': groupboardId,
@@ -160,7 +165,14 @@ class Posts:
         return response
 
     def get_votes(self, groupboardId=None, postId=None):
-        return
+        query_r = self.table.query(
+            KeyConditionExpression=Key('groupboardId').eq(groupboardId)
+                                    & Key('postId').eq(postId)
+            )
+        for item in query_r['Items']:
+            votecount = item['votes']
+
+        return votecount
 
     def create_table(self):
         """
