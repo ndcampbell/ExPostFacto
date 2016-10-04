@@ -1,26 +1,28 @@
-var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './scripts/main'
-  ],
+  entry: './src/main.jsx',
   output: {
-    path: path.join(__dirname, 'scripts'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    // Output the bundled file.
+    path: './src',
+    // Use the name specified in the entry key as name for the bundle file.
+    filename: 'bundle.js'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'scripts')
-    }]
+    loaders: [
+      {
+        // Test for js or jsx files.
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      }
+    ]
+  },
+  resolve: {
+    // Include empty string '' to resolve files by their explicit extension
+    // (e.g. require('./somefile.ext')).
+    // Include '.js', '.jsx' to resolve files by these implicit extensions
+    // (e.g. require('underscore')).
+    extensions: ['', '.js', '.jsx']
   }
 };

@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack --progress"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "babel-loader": "^6.2.5",
     "babel-preset-react": "^6.16.0",
     "react": "^15.3.2",
+    "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2",
     "webpack": "^1.13.2"
   },
