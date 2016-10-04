@@ -1,0 +1,26 @@
+{
+  "name": "ex-post-facto",
+  "version": "0.1.0",
+  "description": "Retrospective Application",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "webpack --progress"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-react": "^6.16.0",
+    "react": "^15.3.2",
+    "react-bootstrap": "^0.30.5",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "react-hot-loader": "^3.0.0-beta.5",
+    "webpack-dev-server": "^1.16.1"
+  }
+}

@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
+#
+#
 __pycache__/
 *.py[cod]
 *$py.class
@@ -83,4 +85,8 @@ ENV/
 
 # Spyder project settings
 .spyderproject
+
+#Front end ignors
+node_modules/
+bundle.js
 
