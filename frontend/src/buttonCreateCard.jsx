@@ -6,9 +6,9 @@ var Button = require('react-bootstrap').Button;
 var ButtonCreateCard = React.createClass({
     render: function() {
         return (
-            <ButtonToolbar>
-                <Button bsStyle="primary">Create Card</Button>
-            </ButtonToolbar>
+                <div className="cardbutton">
+                  <Button bsStyle="primary">Create Card</Button>
+                </div>
         );
     }
 });
