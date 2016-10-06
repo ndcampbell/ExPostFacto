@@ -3,18 +3,6 @@ import ReactDOM from 'react-dom';
 import MainGrid from './mainGrid.js';
 import './index.css';
 
-var Card = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <h1>Card!</h1>
-        <MainGrid />
-      </div>
-    );
-  }
-});
-
-ReactDOM.render(<Card />,
+ReactDOM.render(<MainGrid />,
   document.getElementById('root')
 );
-
