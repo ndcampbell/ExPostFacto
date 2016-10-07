@@ -12,6 +12,10 @@ app.get('/', function (req, res) {
         {
             title: "test card 2",
             description: "this is test two",
+        },
+        {
+            title: "test card 4",
+            description: "this is test two",
         }
     ];
     res.setHeader('Access-Control-Allow-Origin', '*');
