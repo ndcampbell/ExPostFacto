@@ -1,17 +1,33 @@
 # ex-post-facto - A retrospective application 
 
-This will be a small web app to provide a board for team retrospectives.
+A web app to provide a board for team retrospectives.
 
-- Python3
-- Flask
-- DynamoDB (for now)
-- Boto3
+## Tech Stack
 
-To Do:
-- Update dynamoDB key structure
-- Add ability to post to board
-- Add ability to comment on post
-- Add ability to delete board
-- Slack integration for creating boards
-- Slack integration for creating post
-- All visual aspects
+### Backend
+
+- NodeJS 
+- Express.js
+- PostgreSQL
+
+### Frontend
+
+- React
+- React-bootstrap (may switch to Material-UI or React-Toolkit)
+- whatwg-fetch
+
+## Basic Functionality
+
+There will be a board with 2+ columns. You can add cards to each column. Users can then vote on the cards they want to discuss. There should be a view to see cards ordered by votes.
+
+Should support Mutliple teams, with multiple boards, with multiple columns, with multiple cards. 
+
+No Auth is required right away, all actions can be annoymous. 
+
+## To Do:
+
+- Flesh out frontend skeleton
+- Define Database scheme
+- Write the entire backend
+- Basically everything
+
