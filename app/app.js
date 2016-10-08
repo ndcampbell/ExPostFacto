@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
-var db = require('./db.js');
+//var db = require('./db.js');
+
+//db.createTables;
 
 app.get('/v1/cards', function (req, res) {
     var data = [
