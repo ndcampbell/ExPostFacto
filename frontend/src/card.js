@@ -28,6 +28,12 @@ var Card = React.createClass({
               >
               <Glyphicon glyph={this.state.starType}/> Vote
             </Button>
+            <Button
+              bsSize="small"
+              className="btn right-block"
+              >
+              <Glyphicon glyph="trash"/>
+            </Button>
           </Panel>
           </div>
       );
@@ -42,7 +48,7 @@ var Cards = React.createClass({
     var _this = this;
     this.serverRequest =
       axios
-        .get("http://localhost:3001/")
+        .get("http://localhost:3001/cards")
         .then(function(result) {
           _this.setState({
               cardsData: result.data
@@ -59,7 +65,7 @@ var Cards = React.createClass({
   },
   render: function () {
     var cardMap = this.state.cardsData.map(function(card) {
-      return (<Card title={card.title} desc={card.description}/>);
+      return (<Card key={card.id} title={card.title} desc={card.description}/>);
     });
     return (
       <div>

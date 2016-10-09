@@ -2,18 +2,26 @@ var massive = require('massive');
 var connectionString = "postgres://epfUser:password@localhost/epfDb";
 var db = massive.connectSync({connectionString: connectionString});
 
-function createTables() {
+var createTables = function() {
     db.cardsTable.create_cards_table(function(err, result) {
     console.log("Created Cards Table", err, result)
   });
 }
 
-function insertCard(newCard) {
+var insertCard = function(newCard) {
   console.log("Inserting New Card", newCard)
   db.cards.save(newCard, function(err,result){
     console.log(result);
   });
 }
+
+var getCards = function() {
+
+  console.log('Getting all cards');
+  var res = db.runSync("select * from cards");
+  return res;
+}
+
 //test function to show massive usage
 //function makeNewUser() {
 //    var newUser = {
@@ -28,6 +36,7 @@ function insertCard(newCard) {
 //}
 
 module.exports = {
-  createTables: createTables(),
-  insertCard: insertCard(),
+  createTables,
+  insertCard,
+  getCards,
 }

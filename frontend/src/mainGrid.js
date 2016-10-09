@@ -2,6 +2,7 @@ import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
 import CreateCardButton from './createCardButton.js';
 import Cards from './card.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const styles = {
     leftSide: {
@@ -15,6 +16,7 @@ const styles = {
 var MainGrid = React.createClass({
     render: function() {
         return (
+        <MuiThemeProvider>
             <Grid>
                 <Row className="show-grid">
                     <Col xs={6} md={6} style={ styles.leftSide }>
@@ -31,6 +33,7 @@ var MainGrid = React.createClass({
                     </Col>
                 </Row>
             </Grid>
+          </MuiThemeProvider>
         );
     }
 });

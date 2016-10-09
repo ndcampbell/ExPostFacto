@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import Dialog from 'material-ui/Dialog';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import NewCardForm from './newCardForm.js';
 
 const styles = {
@@ -12,33 +14,28 @@ const styles = {
 
 var CreateCardButton = React.createClass({
     getInitialState() {
-      return { showModal: false };
+      return { showDialog: false };
     },
     close() {
-      this.setState({ showModal: false });
+      this.setState({ showDialog: false });
     },
     open() {
-        this.setState({ showModal: true });
+        this.setState({ showDialog: true });
       },
     render: function() {
         return (
                 <div style={ styles.container }>
-                  <Button
-                    bsStyle="primary"
-                    className="btn center-block"
-                    onClick={this.open}>
-                    Create Card
-                  </Button>
-                 <Modal show={this.state.showModal} onHide={this.close}>
-                   <Modal.Header closeButton>
-                     <Modal.Title>Create New Card</Modal.Title>
-                   </Modal.Header>
-                   <Modal.Body>
-                     <NewCardForm />
-                   </Modal.Body>
-                   <Modal.Footer>
-                   </Modal.Footer>
-                 </Modal>
+                  <FloatingActionButton onClick={this.open}>
+                    <ContentAdd />
+                  </FloatingActionButton>
+                  <Dialog
+                    title="Create New Card"
+                    modal={false}
+                    open={this.state.showDialog}
+                    onRequestClose={this.close}
+                    >
+                    <NewCardForm />
+                  </Dialog>
                 </div>
         );
     }
