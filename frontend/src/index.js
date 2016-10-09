@@ -1,20 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainGrid from './mainGrid.js';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import './index.css';
 
-var Card = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <h1>Card!</h1>
-        <MainGrid />
-      </div>
-    );
-  }
-});
+injectTapEventPlugin();
 
-ReactDOM.render(<Card />,
+ReactDOM.render(<MainGrid />,
   document.getElementById('root')
 );
-

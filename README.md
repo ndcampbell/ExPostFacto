@@ -8,13 +8,17 @@ A web app to provide a board for team retrospectives.
 
 - NodeJS 
 - Express.js
-- PostgreSQL
+- PostgreSQL (Massivejs as connector)
+
+Running for testing: ``cd app; DEBUG=express:* node app.js``
 
 ### Frontend
 
 - React
 - React-bootstrap (may switch to Material-UI or React-Toolkit)
-- whatwg-fetch
+- axios
+
+Running test server: ``cd frontend; npm start``
 
 ## Basic Functionality
 
