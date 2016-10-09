@@ -1,9 +1,10 @@
 import React from 'react';
-import {Button, Panel, Glyphicon} from 'react-bootstrap';
-//import 'whatwg-fetch';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever';
 import axios from 'axios';
 
-var Card = React.createClass({
+var EPFCard = React.createClass({
   getInitialState() {
     return { starType: 'star-empty'};
   },
@@ -19,23 +20,16 @@ var Card = React.createClass({
       const desc = (<p>{ this.props.desc }</p>);
       return (
           <div>
-          <Panel header={title} bsStyle="primary">
-            {desc}
-            <Button
-              bsSize="small"
-              className="btn center-block"
-              onClick={this.toggleVote}
-              >
-              <Glyphicon glyph={this.state.starType}/> Vote
-            </Button>
-            <Button
-              bsSize="small"
-              className="btn right-block"
-              >
-              <Glyphicon glyph="trash"/>
-            </Button>
-          </Panel>
-          </div>
+            <Card>
+              <CardHeader
+                title={title}
+              />
+              <CardText>{desc}</CardText>
+                <CardActions>
+                  <IconButton><ActionDeleteForever /></IconButton>
+            </CardActions>
+          </Card>
+        </div>
       );
   }
 });
@@ -65,7 +59,7 @@ var Cards = React.createClass({
   },
   render: function () {
     var cardMap = this.state.cardsData.map(function(card) {
-      return (<Card key={card.id} title={card.title} desc={card.description}/>);
+      return (<EPFCard key={card.id} title={card.title} desc={card.description}/>);
     });
     return (
       <div>

@@ -1,4 +1,4 @@
-# ex-post-facto - A retrospective application 
+# ex-post-facto - A retrospective application
 
 A web app to provide a board for team retrospectives.
 
@@ -6,7 +6,7 @@ A web app to provide a board for team retrospectives.
 
 ### Backend
 
-- NodeJS 
+- NodeJS
 - Express.js
 - PostgreSQL (Massivejs as connector)
 
@@ -15,7 +15,7 @@ Running for testing: ``cd app; DEBUG=express:* node app.js``
 ### Frontend
 
 - React
-- React-bootstrap (may switch to Material-UI or React-Toolkit)
+- Material-UI
 - axios
 
 Running test server: ``cd frontend; npm start``
@@ -24,9 +24,9 @@ Running test server: ``cd frontend; npm start``
 
 There will be a board with 2+ columns. You can add cards to each column. Users can then vote on the cards they want to discuss. There should be a view to see cards ordered by votes.
 
-Should support Mutliple teams, with multiple boards, with multiple columns, with multiple cards. 
+Should support Mutliple teams, with multiple boards, with multiple columns, with multiple cards.
 
-No Auth is required right away, all actions can be annoymous. 
+No Auth is required right away, all actions can be annoymous.
 
 ## To Do:
 
@@ -34,4 +34,3 @@ No Auth is required right away, all actions can be annoymous.
 - Define Database scheme
 - Write the entire backend
 - Basically everything
-
