@@ -1,13 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
 
 var NewCardForm = React.createClass({
+  getInitialState() {
+    return { titleValue: '',
+             descValue: ''};
+  },
+  _handleTitleChange: function(e) {
+    this.setState({
+        titleValue: e.target.value
+    });
+  },
+_handleDescChange: function(e) {
+    this.setState({
+        descValue: e.target.value
+    });
+  },
   handleSubmit: function() {
-    var newTitle = ReactDOM.findDOMNode(this.refs.title).value;
-    var newDesc = ReactDOM.findDOMNode(this.refs.description).value;
-    var newCard = { title: newTitle, description: newDesc };
+    var newCard = { title: this.state.titleValue, description: this.state.descValue };
     this.serverRequest =
       axios
         .post("http://localhost:3001/cards", newCard,
@@ -19,20 +31,22 @@ var NewCardForm = React.createClass({
   render: function () {
       return(
         <form>
-          <FormGroup controlId="newCardTitle">
-            <ControlLabel>Title</ControlLabel>
-            <FormControl type="text" placeholder="Title" ref='title'/>
-          </FormGroup>
-          <FormGroup controlId="newCardDescription">
-            <ControlLabel>Description</ControlLabel>
-            <FormControl componentClass="textarea" placeholder="Description" ref='description'/>
-          </FormGroup>
-            <Button
-              type="submit"
-              onClick={this.handleSubmit}
-            >
-            Submit
-            </Button>
+          <TextField
+            floatingLabelText="Title"
+            defaultValue={this.state.titleValue}
+            onChange={this._handleTitleChange}
+          /><br />
+          <TextField
+            floatingLabelText="Description"
+            defaultValue={this.state.titleDesc}
+            multiLine={true}
+            rows={4}
+            onChange={this._handleDescChange}
+          /><br />
+        <RaisedButton label="Submit"
+          primary={true}
+          onClick={this.handleSubmit}
+        />
         </form>
       );
   }
