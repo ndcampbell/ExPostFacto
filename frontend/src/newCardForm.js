@@ -22,8 +22,7 @@ _handleDescChange: function(e) {
     var newCard = { title: this.state.titleValue, description: this.state.descValue };
     this.serverRequest =
       axios
-        .post("http://localhost:3001/cards", newCard,
-        {"Content-Type": "application/json"})
+        .post("http://localhost:3001/cards", newCard)
         .then(function(result) {
             console.log(newCard)
             });

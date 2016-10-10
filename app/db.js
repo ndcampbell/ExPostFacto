@@ -16,10 +16,16 @@ var insertCard = function(newCard) {
 }
 
 var getCards = function() {
-
   console.log('Getting all cards');
   var res = db.runSync("select * from cards");
   return res;
+}
+
+var deleteCard = function(deleteCard) {
+    console.log("Deleting ", deleteCard);
+    db.cards.destroy(deleteCard, function(err, res) {
+      console.log("Deleted ", res);
+    });
 }
 
 //test function to show massive usage
@@ -39,4 +45,5 @@ module.exports = {
   createTables,
   insertCard,
   getCards,
+  deleteCard
 }
