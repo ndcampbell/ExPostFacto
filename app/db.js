@@ -28,6 +28,19 @@ var deleteCard = function(deleteCard) {
     });
 }
 
+var voteCard = function(cardData) {
+  db.cards.find(cardData.cardId ,function(err,res) {
+    if (!cardData.voted){
+      db.cards.save({id: cardData.cardId, votes: res.votes-1 }, function(err, res) {
+        console.log("Removed Vote", res);
+      });
+    } else {
+      db.cards.save({id: cardData.cardId, votes: res.votes+1 }, function(err, res) {
+        console.log("Added Voted", res);
+      });
+    }
+  });
+}
 //test function to show massive usage
 //function makeNewUser() {
 //    var newUser = {
@@ -45,5 +58,6 @@ module.exports = {
   createTables,
   insertCard,
   getCards,
-  deleteCard
+  deleteCard,
+  voteCard
 }

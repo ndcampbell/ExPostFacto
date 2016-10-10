@@ -3,4 +3,6 @@ CREATE TABLE IF NOT EXISTS cards (
                 title text,
                 description text,
                 votes int,
+                groupname text,
+                columnid int,
                 timestamp timestamptz default current_timestamp);
