@@ -7,6 +7,7 @@ import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import axios from 'axios';
 
 import NewCardForm from './newCardForm.js';
+import VoteButton from './voteButton.js';
 
 var EPFCard = React.createClass({
   getInitialState() {
@@ -52,6 +53,7 @@ var EPFCard = React.createClass({
                     >
                     <ModeEdit />
                   </IconButton>
+                  <VoteButton cardId={this.props.cardId}/>
                   <IconButton
                     onClick={this.onDelete}
                     tooltip="Delete Card"

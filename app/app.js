@@ -38,6 +38,12 @@ app.delete('/cards', function(req, res) {
   res.sendStatus(200).send("OK");
 });
 
+app.post('/card/vote', function(req, res) {
+  db.voteCard(req.body);
+  res.sendStatus(200).send("OK");
+
+});
+
 app.listen(3001, function() {
     console.log('App listening on port 3001');
 });
