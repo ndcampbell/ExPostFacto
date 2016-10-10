@@ -32,6 +32,12 @@ app.post('/cards', function(req, res) {
     res.sendStatus(200).send('OK');
 });
 
+app.delete('/cards', function(req, res) {
+  console.log(req.body);
+  db.deleteCard(req.body);
+  res.sendStatus(200).send("OK");
+});
+
 app.listen(3001, function() {
     console.log('App listening on port 3001');
 });

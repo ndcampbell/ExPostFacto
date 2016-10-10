@@ -15,6 +15,15 @@ var EPFCard = React.createClass({
       this.setState({ starType: 'star-empty' });
     }
   },
+  onDelete() {
+    var deleteData = {id: this.props.cardId};
+    this.serverRequest =
+      axios({
+          method: 'delete',
+          url: 'http://localhost:3001/cards',
+          data: deleteData
+        });
+  },
   render: function() {
       const title = (<h3>{this.props.title}</h3>);
       const desc = (<p>{ this.props.desc }</p>);
@@ -26,7 +35,7 @@ var EPFCard = React.createClass({
               />
               <CardText>{desc}</CardText>
                 <CardActions>
-                  <IconButton><ActionDeleteForever /></IconButton>
+                  <IconButton onClick={this.onDelete}><ActionDeleteForever /></IconButton>
             </CardActions>
           </Card>
         </div>
@@ -52,14 +61,14 @@ var Cards = React.createClass({
   },
   componentDidMount: function() {
     this.loadCardsFromServer();
-    //setInterval(this.loadCardsFromServer, 2000);
+    setInterval(this.loadCardsFromServer, 2000);
   },
   componentWillUnmount: function() {
     this.serverRequest.abort();
   },
   render: function () {
     var cardMap = this.state.cardsData.map(function(card) {
-      return (<EPFCard key={card.id} title={card.title} desc={card.description}/>);
+      return (<EPFCard key={card.id} cardId={card.id} title={card.title} desc={card.description}/>);
     });
     return (
       <div>
