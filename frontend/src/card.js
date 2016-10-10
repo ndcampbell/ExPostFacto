@@ -1,13 +1,24 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import Dialog from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
 import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever';
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import axios from 'axios';
+
+import NewCardForm from './newCardForm.js';
 
 var EPFCard = React.createClass({
   getInitialState() {
-    return { starType: 'star-empty'};
+    return { starType: 'star-empty',
+              showDialog: false };
   },
+  closeEdit() {
+    this.setState({ showDialog: false });
+  },
+  openEdit() {
+      this.setState({ showDialog: true });
+    },
   toggleVote() {
     if (this.state.starType === "star-empty") {
       this.setState({ starType: 'star' });
@@ -26,7 +37,7 @@ var EPFCard = React.createClass({
   },
   render: function() {
       const title = (<h3>{this.props.title}</h3>);
-      const desc = (<p>{ this.props.desc }</p>);
+      const desc = (<p>{ this.props.description }</p>);
       return (
           <div>
             <Card>
@@ -35,9 +46,34 @@ var EPFCard = React.createClass({
               />
               <CardText>{desc}</CardText>
                 <CardActions>
-                  <IconButton onClick={this.onDelete}><ActionDeleteForever /></IconButton>
+                  <IconButton
+                    tooltip="Edit Card"
+                    onClick={this.openEdit}
+                    >
+                    <ModeEdit />
+                  </IconButton>
+                  <IconButton
+                    onClick={this.onDelete}
+                    tooltip="Delete Card"
+                    style={{float: 'right'}}
+                    >
+                    <ActionDeleteForever />
+                  </IconButton>
             </CardActions>
           </Card>
+          <Dialog
+            title="Create New Card"
+            modal={false}
+            open={this.state.showDialog}
+            onRequestClose={this.closeEdit}
+            >
+            <NewCardForm
+              title={this.props.title}
+              description={this.props.description}
+              cardId={this.props.cardId}
+              editCard={true}
+            />
+          </Dialog>
         </div>
       );
   }
@@ -68,7 +104,7 @@ var Cards = React.createClass({
   },
   render: function () {
     var cardMap = this.state.cardsData.map(function(card) {
-      return (<EPFCard key={card.id} cardId={card.id} title={card.title} desc={card.description}/>);
+      return (<EPFCard key={card.id} cardId={card.id} title={card.title} description={card.description}/>);
     });
     return (
       <div>
