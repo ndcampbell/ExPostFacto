@@ -19,7 +19,12 @@ _handleDescChange: function(e) {
     });
   },
   handleSubmit: function() {
-    var newCard = { title: this.state.titleValue, description: this.state.descValue };
+    var newCard
+    if (this.props.editCard) {
+      newCard = { id: this.props.cardId, title: this.state.titleValue, description: this.state.descValue };
+    } else {
+      newCard = { title: this.state.titleValue, description: this.state.descValue };
+    }
     this.serverRequest =
       axios
         .post("http://localhost:3001/cards", newCard)
@@ -27,17 +32,19 @@ _handleDescChange: function(e) {
             console.log(newCard)
             });
   },
+  handleEdit: function() {
+  },
   render: function () {
       return(
         <form>
           <TextField
             floatingLabelText="Title"
-            defaultValue={this.state.titleValue}
+            defaultValue={this.props.title}
             onChange={this._handleTitleChange}
           /><br />
           <TextField
             floatingLabelText="Description"
-            defaultValue={this.state.titleDesc}
+            defaultValue={this.props.description}
             multiLine={true}
             rows={4}
             onChange={this._handleDescChange}
