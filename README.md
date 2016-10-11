@@ -1,6 +1,6 @@
-# ex-post-facto - A retrospective application
+# ExPostFacto - Team Retrospectives.
 
-A web app to provide a board for team retrospectives.
+A web app for team retrospectives.
 
 ## Tech Stack
 
@@ -30,7 +30,6 @@ No Auth is required right away, all actions can be annoymous.
 
 ## To Do:
 
-- Flesh out frontend skeleton
-- Define Database scheme
-- Write the entire backend
-- Basically everything
+- Add team and board creation pages and logic
+- Add ability to define the columns on a board
+- Add authentication
