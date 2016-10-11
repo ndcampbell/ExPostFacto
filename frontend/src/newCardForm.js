@@ -5,25 +5,25 @@ import axios from 'axios';
 
 var NewCardForm = React.createClass({
   getInitialState() {
-    return { titleValue: '',
-             descValue: ''};
+    return { title: this.props.title || '',
+             description: this.props.description || ''};
   },
   _handleTitleChange: function(e) {
     this.setState({
-        titleValue: e.target.value
+        title: e.target.value
     });
   },
-_handleDescChange: function(e) {
+  _handleDescChange: function(e) {
     this.setState({
-        descValue: e.target.value
+        description: e.target.value
     });
   },
   handleSubmit: function() {
     var newCard
     if (this.props.editCard) {
-      newCard = { id: this.props.cardId, title: this.state.titleValue, description: this.state.descValue };
-    } else {
-      newCard = { title: this.state.titleValue, description: this.state.descValue };
+      newCard = { id: this.props.cardId, title: this.state.title, description: this.state.description };
+    } else{
+      newCard = { title: this.state.title, description: this.state.description};
     }
     this.serverRequest =
       axios
@@ -31,8 +31,6 @@ _handleDescChange: function(e) {
         .then(function(result) {
             console.log(newCard)
             });
-  },
-  handleEdit: function() {
   },
   render: function () {
       return(
