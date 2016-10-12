@@ -7,8 +7,11 @@ import NewCardForm from './newCardForm.js';
 const styles = {
       container: {
         textAlign: 'center',
-        padding: '20px',
+        margin: '0 auto',
+        //padding: '20px',
+        width: '480px',
         bottom: '50px',
+        position: 'fixed',
       }
 };
 

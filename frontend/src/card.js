@@ -113,6 +113,7 @@ var Cards = React.createClass({
     return (
       <div>
         {cardMap}
+        <div style={{height: '150px'}}></div>
       </div>
     );
   }
