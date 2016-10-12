@@ -86,10 +86,12 @@ var Cards = React.createClass({
     return {cardsData: []};
   },
     loadCardsFromServer: function() {
+    var url = ("http://localhost:3001/cards/?columnid=" + this.props.cardColumn);
+    console.log(url);
     var _this = this;
     this.serverRequest =
       axios
-        .get("http://localhost:3001/cards")
+        .get(url)
         .then(function(result) {
           _this.setState({
               cardsData: result.data
@@ -111,6 +113,7 @@ var Cards = React.createClass({
     return (
       <div>
         {cardMap}
+        <div style={{height: '150px'}}></div>
       </div>
     );
   }

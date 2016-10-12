@@ -15,9 +15,9 @@ var insertCard = function(newCard) {
   });
 }
 
-var getCards = function() {
+var getCards = function(columnid) {
   console.log('Getting all cards');
-  var res = db.runSync("select * from cards");
+  var res = db.cards.findSync({columnid: columnid});
   return res;
 }
 

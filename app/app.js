@@ -23,7 +23,8 @@ app.all('*', function(req,res,next) {
 app.use(bodyParser.json())
 
 app.get('/cards', function (req, res) {
-    var data = db.getCards();
+    var columnid = req.query.columnid;
+    var data = db.getCards(columnid);
     res.status(200).send(JSON.stringify(data));
 });
 

@@ -7,8 +7,11 @@ import NewCardForm from './newCardForm.js';
 const styles = {
       container: {
         textAlign: 'center',
-        padding: '20px',
+        margin: '0 auto',
+        //padding: '20px',
+        width: '480px',
         bottom: '50px',
+        position: 'fixed',
       }
 };
 
@@ -34,7 +37,7 @@ var CreateCardButton = React.createClass({
                     open={this.state.showDialog}
                     onRequestClose={this.close}
                     >
-                    <NewCardForm />
+                    <NewCardForm cardColumn={this.props.cardColumn}/>
                   </Dialog>
                 </div>
         );
