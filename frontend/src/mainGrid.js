@@ -25,14 +25,14 @@ var MainGrid = React.createClass({
           <div style={styles.divLeft}>
             <center><h2>What went well?</h2></center>
               <br />
-              <Cards />
-              <CreateCardButton cardcol={1}/>
+              <Cards cardColumn={1}/>
+              <CreateCardButton cardColumn={1}/>
           </div>
           <div style={styles.divRight}>
             <center><h2>What didn't go well?</h2></center>
               <br />
-              <Cards />
-              <CreateCardButton cardcol={1}/>
+              <Cards cardColumn={2}/>
+              <CreateCardButton cardColumn={2}/>
           </div>
         </div>
       </MuiThemeProvider>

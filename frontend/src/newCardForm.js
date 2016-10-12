@@ -23,7 +23,7 @@ var NewCardForm = React.createClass({
     if (this.props.editCard) {
       newCard = { id: this.props.cardId, title: this.state.title, description: this.state.description };
     } else{
-      newCard = { title: this.state.title, description: this.state.description};
+      newCard = { title: this.state.title, description: this.state.description, columnid: this.props.cardColumn };
     }
     this.serverRequest =
       axios
