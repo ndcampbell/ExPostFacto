@@ -1,7 +1,8 @@
 import React from 'react';
 import CreateCardButton from './createCardButton.js';
+
 import Cards from './card.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import HeaderBar from './headerMenu.js';
 
 var MainGrid = React.createClass({
   render: function() {
@@ -20,7 +21,8 @@ var MainGrid = React.createClass({
       }
     }
     return (
-      <MuiThemeProvider>
+      <div>
+        <HeaderBar />
         <div style={styles.divWrap}>
           <div style={styles.divLeft}>
             <center><h2>What went well?</h2></center>
@@ -35,9 +37,10 @@ var MainGrid = React.createClass({
               <CreateCardButton cardColumn={2}/>
           </div>
         </div>
-      </MuiThemeProvider>
+      </div>
     );
   }
 });
+
 
 module.exports = MainGrid;
