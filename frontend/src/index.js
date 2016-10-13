@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MainGrid from './mainGrid.js';
+import { Router, Route, browserHistory} from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import CardGrid from './cardGrid.js';
 import './index.css';
 
 injectTapEventPlugin();
@@ -12,7 +13,10 @@ var MainPage = React.createClass({
   render: function() {
     return(
     <MuiThemeProvider>
-      <MainGrid />
+      <Router history={browserHistory}>
+        <Route path="/" component={CardGrid}/>
+        <Route path="*" component={CardGrid}/>
+      </Router>
     </MuiThemeProvider>
   );
   }

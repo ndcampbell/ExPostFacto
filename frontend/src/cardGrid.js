@@ -4,7 +4,7 @@ import CreateCardButton from './createCardButton.js';
 import Cards from './card.js';
 import HeaderBar from './headerMenu.js';
 
-var MainGrid = React.createClass({
+var CardGrid = React.createClass({
   render: function() {
     const styles = {
       divWrap: {
@@ -43,4 +43,4 @@ var MainGrid = React.createClass({
 });
 
 
-module.exports = MainGrid;
+module.exports = CardGrid;
