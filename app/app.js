@@ -45,6 +45,11 @@ app.post('/card/vote', function(req, res) {
 
 });
 
+app.post('/boards', function(req, res) {
+  db.addBoard(req.body);
+  res.sendStatus(200).send("OK");
+});
+
 app.listen(3001, function() {
     console.log('App listening on port 3001');
 });

@@ -16,7 +16,7 @@ var HeaderMenu = React.createClass({
         anchorOrigin={{horizontal: 'left', vertical: 'top'}}
       >
       <MenuItem primaryText="Groups" />
-      <MenuItem primaryText="Boards" />
+      <MenuItem primaryText="Boards" linkButton={true} href="/boards" />
       <MenuItem primaryText="Next Stage" />
       </IconMenu>
     );
@@ -31,7 +31,7 @@ var HeaderBar = React.createClass({
   render: function() {
     return (
         <AppBar
-          title="ExPostFacto - Test Board"
+          title="ExPostFacto"
           titleStyle={{textAlign: 'center'}}
           iconElementLeft={<HeaderMenu />}
         />

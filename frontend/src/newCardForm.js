@@ -39,6 +39,7 @@ var NewCardForm = React.createClass({
             floatingLabelText="Title"
             defaultValue={this.props.title}
             onChange={this._handleTitleChange}
+            fullWidth={true}
           /><br />
           <TextField
             floatingLabelText="Description"
@@ -46,6 +47,7 @@ var NewCardForm = React.createClass({
             multiLine={true}
             rows={4}
             onChange={this._handleDescChange}
+            fullWidth={true}
           /><br />
         <RaisedButton label="Submit"
           primary={true}

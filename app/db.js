@@ -3,6 +3,9 @@ var connectionString = "postgres://epfUser:password@localhost/epfDb";
 var db = massive.connectSync({connectionString: connectionString});
 
 var createTables = function() {
+    db.boardsTable.create_boards_table(function(err, result) {
+    console.log("Created Boards Table", err, result)
+  });
     db.cardsTable.create_cards_table(function(err, result) {
     console.log("Created Cards Table", err, result)
   });
@@ -41,6 +44,13 @@ var voteCard = function(cardData) {
     }
   });
 }
+
+var addBoard = function(boardData) {
+  console.log("Adding Board")
+  db.boards.save(boardData, function(err,result){
+    console.log(result);
+  });
+}
 //test function to show massive usage
 //function makeNewUser() {
 //    var newUser = {
@@ -59,5 +69,6 @@ module.exports = {
   insertCard,
   getCards,
   deleteCard,
-  voteCard
+  voteCard,
+  addBoard
 }
