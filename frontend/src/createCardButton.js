@@ -37,7 +37,9 @@ var CreateCardButton = React.createClass({
                     open={this.state.showDialog}
                     onRequestClose={this.close}
                     >
-                    <NewCardForm cardColumn={this.props.cardColumn}/>
+                    <NewCardForm
+                        cardColumn={this.props.cardColumn}
+                        boardId={this.props.boardId}/>
                   </Dialog>
                 </div>
         );

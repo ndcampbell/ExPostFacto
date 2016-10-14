@@ -32,7 +32,7 @@ var EPFCard = React.createClass({
     this.serverRequest =
       axios({
           method: 'delete',
-          url: 'http://localhost:3001/cards',
+          url: 'http://localhost:3001/api/cards',
           data: deleteData
         });
   },
@@ -86,7 +86,7 @@ var Cards = React.createClass({
     return {cardsData: []};
   },
     loadCardsFromServer: function() {
-    var url = ("http://localhost:3001/cards/?columnid=" + this.props.cardColumn);
+    var url = ("http://localhost:3001/api/cards/?columnid=" + this.props.cardColumn + "&boardid=" + this.props.boardId);
     console.log(url);
     var _this = this;
     this.serverRequest =
@@ -96,7 +96,6 @@ var Cards = React.createClass({
           _this.setState({
               cardsData: result.data
             });
-          console.log(result.data);
       });
   },
   componentDidMount: function() {

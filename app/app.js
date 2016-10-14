@@ -22,33 +22,44 @@ app.all('*', function(req,res,next) {
 
 app.use(bodyParser.json())
 
-app.get('/cards', function (req, res) {
+// Card routes
+
+app.get('/api/cards', function (req, res) {
     var columnid = req.query.columnid;
-    var data = db.getCards(columnid);
+    var boardid = req.query.boardid;
+    var data = db.getCards(columnid, boardid);
     res.status(200).send(JSON.stringify(data));
 });
 
-app.post('/cards', function(req, res) {
+app.post('/api/cards', function(req, res) {
     db.insertCard(req.body);
     res.sendStatus(200).send('OK');
 });
 
-app.delete('/cards', function(req, res) {
+app.delete('/api/cards', function(req, res) {
   console.log(req.body);
   db.deleteCard(req.body);
   res.sendStatus(200).send("OK");
 });
 
-app.post('/card/vote', function(req, res) {
+app.post('/api/card/vote', function(req, res) {
   db.voteCard(req.body);
   res.sendStatus(200).send("OK");
 
 });
 
-app.post('/boards', function(req, res) {
+// Board routes
+
+app.post('/api/boards', function(req, res) {
   db.addBoard(req.body);
   res.sendStatus(200).send("OK");
 });
+
+app.get('/api/boards', function(req, res) {
+  var data = db.getBoards();
+  res.status(200).send(JSON.stringify(data));
+});
+
 
 app.listen(3001, function() {
     console.log('App listening on port 3001');

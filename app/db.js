@@ -18,9 +18,8 @@ var insertCard = function(newCard) {
   });
 }
 
-var getCards = function(columnid) {
-  console.log('Getting all cards');
-  var res = db.cards.findSync({columnid: columnid});
+var getCards = function(columnid, boardid) {
+  var res = db.cards.findSync({columnid: columnid, boardid: boardid});
   return res;
 }
 
@@ -51,18 +50,12 @@ var addBoard = function(boardData) {
     console.log(result);
   });
 }
-//test function to show massive usage
-//function makeNewUser() {
-//    var newUser = {
-//      email : "test2@test.com",
-//      first : "Joe",
-//      last : "Test"
-//    };
 
-//    db.users.save(newUser, function(err,result){
- //     console.log(result);
-//    });
-//}
+var getBoards = function() {
+  var res = db.runSync("select * from boards");
+  console.log("boards", res)
+  return res;
+}
 
 module.exports = {
   createTables,
@@ -70,5 +63,6 @@ module.exports = {
   getCards,
   deleteCard,
   voteCard,
-  addBoard
+  addBoard,
+  getBoards
 }

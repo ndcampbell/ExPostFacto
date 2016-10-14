@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever';
 import axios from 'axios';
+import { browserHistory } from 'react-router'
 
 const styles = {
   board: {
@@ -28,13 +29,14 @@ var Board = React.createClass({
     this.serverRequest =
       axios({
           method: 'delete',
-          url: 'http://localhost:3001/boards',
+          url: 'http://localhost:3001/api/boards',
           data: deleteData
         });
   },
   render: function() {
+      const boardUrl = '/board/' + this.props.boardId;
       return (
-        <div onClick="" style={styles.board}>
+        <div onClick={function(){browserHistory.push(boardUrl)}} style={styles.board}>
             <Paper style={{height: '150px'}} zDepth={2} >
               <h3>{this.props.name}</h3>
                   <IconButton
@@ -50,42 +52,40 @@ var Board = React.createClass({
   }
 });
 
-var Cards = React.createClass({
+var Boards = React.createClass({
   getInitialState: function() {
-    return {cardsData: []};
+    return {boardsData: []};
   },
-    loadCardsFromServer: function() {
-    var url = ("http://localhost:3001/cards/?columnid=" + this.props.cardColumn);
-    console.log(url);
+  loadBoardsFromServer: function() {
+    var url = ("http://localhost:3001/api/boards");
     var _this = this;
     this.serverRequest =
       axios
         .get(url)
         .then(function(result) {
+            console.log(result.data);
           _this.setState({
-              cardsData: result.data
+              boardsData: result.data
             });
-          console.log(result.data);
       });
   },
   componentDidMount: function() {
-    this.loadCardsFromServer();
-    setInterval(this.loadCardsFromServer, 2000);
+    this.loadBoardsFromServer();
+    setInterval(this.loadBoardsFromServer, 2000);
   },
   componentWillUnmount: function() {
     this.serverRequest.abort();
   },
   render: function () {
-    var cardMap = this.state.cardsData.map(function(card) {
-      return (<EPFCard key={card.id} cardId={card.id} title={card.title} description={card.description}/>);
+    var boardsMap = this.state.boardsData.map(function(board) {
+      return (<Board key={board.id} boardId={board.id} name={board.name}/>);
     });
     return (
       <div>
-        {cardMap}
-        <div style={{height: '150px'}}></div>
+        {boardsMap}
       </div>
     );
   }
 });
 
-module.exports = Board;
+module.exports = Boards;
