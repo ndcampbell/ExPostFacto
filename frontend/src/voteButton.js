@@ -30,7 +30,7 @@ var VoteButton = React.createClass({
     var voteInfo = {cardId: this.props.cardId, voted: voted};
     this.serverRequest =
       axios
-        .post("http://localhost:3001/card/vote", voteInfo)
+        .post("http://localhost:3001/api/card/vote", voteInfo)
         .then(function(result) {
             console.log(voteInfo)
             });

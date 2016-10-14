@@ -15,7 +15,7 @@ var MainPage = React.createClass({
     return(
     <MuiThemeProvider>
       <Router history={browserHistory}>
-        <Route path="/" component={CardGrid}/>
+        <Route path="/board/:id" component={CardGrid}/>
         <Route path="/boards" component={BoardGrid}/>
         <Route path="*" component={CardGrid}/>
       </Router>

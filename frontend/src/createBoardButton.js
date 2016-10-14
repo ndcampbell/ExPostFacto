@@ -8,7 +8,7 @@ const styles = {
       container: {
         textAlign: 'center',
         margin: '0 auto',
-        //padding: '20px',
+        width: '100%',
         bottom: '50px',
         position: 'fixed',
       }
@@ -27,7 +27,7 @@ var CreateBoardButton = React.createClass({
     render: function() {
         return (
                 <div style={ styles.container }>
-                  <FloatingActionButton onClick={this.open}>
+                  <FloatingActionButton onClick={this.open} tooltip="Create Board">
                     <ContentAdd />
                   </FloatingActionButton>
                   <Dialog

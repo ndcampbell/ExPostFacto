@@ -15,9 +15,7 @@ var HeaderMenu = React.createClass({
         targetOrigin={{horizontal: 'left', vertical: 'top'}}
         anchorOrigin={{horizontal: 'left', vertical: 'top'}}
       >
-      <MenuItem primaryText="Groups" />
       <MenuItem primaryText="Boards" linkButton={true} href="/boards" />
-      <MenuItem primaryText="Next Stage" />
       </IconMenu>
     );
   }

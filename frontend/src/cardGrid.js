@@ -27,14 +27,18 @@ var CardGrid = React.createClass({
           <div style={styles.divLeft}>
             <center><h2>What went well?</h2></center>
               <br />
-              <Cards cardColumn={1}/>
-              <CreateCardButton cardColumn={1}/>
+              <Cards cardColumn={1} boardId={this.props.params.id}/>
+              <CreateCardButton
+                  cardColumn={1}
+                  boardId={this.props.params.id}/>
           </div>
           <div style={styles.divRight}>
             <center><h2>What didn't go well?</h2></center>
               <br />
-              <Cards cardColumn={2}/>
-              <CreateCardButton cardColumn={2}/>
+              <Cards cardColumn={2} boardId={this.props.params.id}/>
+              <CreateCardButton
+                  cardColumn={2}
+                  boardId={this.props.params.id}/>
           </div>
         </div>
       </div>

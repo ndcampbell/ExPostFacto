@@ -21,13 +21,14 @@ var NewCardForm = React.createClass({
   handleSubmit: function() {
     var newCard
     if (this.props.editCard) {
-      newCard = { id: this.props.cardId, title: this.state.title, description: this.state.description };
+      newCard = { id: this.props.cardId,
+          title: this.state.title, description: this.state.description };
     } else{
-      newCard = { title: this.state.title, description: this.state.description, columnid: this.props.cardColumn };
+      newCard = { boardid: this.props.boardId, title: this.state.title, description: this.state.description, columnid: this.props.cardColumn };
     }
     this.serverRequest =
       axios
-        .post("http://localhost:3001/cards", newCard)
+        .post("http://localhost:3001/api/cards", newCard)
         .then(function(result) {
             console.log(newCard)
             });

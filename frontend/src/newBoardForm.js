@@ -17,7 +17,7 @@ var NewBoardForm = React.createClass({
     newBoard = { name: this.state.name };
     this.serverRequest =
       axios
-        .post("http://localhost:3001/boards", newBoard)
+        .post("http://localhost:3001/api/boards", newBoard)
         .then(function(result) {
             console.log(newBoard)
             });
