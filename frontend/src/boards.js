@@ -14,6 +14,7 @@ const styles = {
     display: 'inline-block',
     cursor: 'pointer',
     float: 'left',
+    wordBreak: 'break-word'
   },
   boardLink: {
     display: 'block',

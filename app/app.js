@@ -37,7 +37,6 @@ app.post('/api/cards', function(req, res) {
 });
 
 app.delete('/api/cards', function(req, res) {
-  console.log(req.body);
   db.deleteCard(req.body);
   res.sendStatus(200).send("OK");
 });
@@ -60,6 +59,10 @@ app.get('/api/boards', function(req, res) {
   res.status(200).send(JSON.stringify(data));
 });
 
+app.delete('/api/boards', function(req, res) {
+  db.deleteBoard(req.body);
+  res.sendStatus(200).send("OK");
+});
 
 app.listen(3001, function() {
     console.log('App listening on port 3001');

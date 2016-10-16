@@ -42,6 +42,7 @@ var NewCardForm = React.createClass({
             defaultValue={this.props.title}
             onChange={this._handleTitleChange}
             fullWidth={true}
+            maxLength={250}
           /><br />
           <TextField
             floatingLabelText="Description"

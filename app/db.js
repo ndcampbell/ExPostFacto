@@ -2,6 +2,9 @@ var massive = require('massive');
 var connectionString = "postgres://epfUser:password@localhost/epfDb";
 var db = massive.connectSync({connectionString: connectionString});
 
+
+//Card Logic
+
 var createTables = function() {
     db.boardsTable.create_boards_table(function(err, result) {
     console.log("Created Boards Table", err, result)
@@ -44,6 +47,8 @@ var voteCard = function(cardData) {
   });
 }
 
+//Board Logic
+
 var addBoard = function(boardData) {
   console.log("Adding Board")
   db.boards.save(boardData, function(err,result){
@@ -56,6 +61,13 @@ var getBoards = function() {
   return res;
 }
 
+var deleteBoard = function(deleteBoard) {
+    console.log("Deleting ", deleteBoard);
+    db.boards.destroy(deleteBoard, function(err, res) {
+      console.log("Deleted ", res);
+    });
+}
+
 module.exports = {
   createTables,
   insertCard,
@@ -63,5 +75,6 @@ module.exports = {
   deleteCard,
   voteCard,
   addBoard,
-  getBoards
+  getBoards,
+  deleteBoard
 }

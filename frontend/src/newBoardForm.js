@@ -31,6 +31,7 @@ var NewBoardForm = React.createClass({
             defaultValue={this.props.name}
             onChange={this._handleNameChange}
             fullWidth={true}
+            maxLength={50}
           />
         <RaisedButton label="Submit"
           primary={true}

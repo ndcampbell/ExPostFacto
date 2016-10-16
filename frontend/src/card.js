@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardText} from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
 import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever';
@@ -8,6 +8,12 @@ import axios from 'axios';
 
 import NewCardForm from './newCardForm.js';
 import VoteButton from './voteButton.js';
+
+const styles = {
+    card: {
+        wordBreak: 'break-word',
+    },
+}
 
 var EPFCard = React.createClass({
   getInitialState() {
@@ -38,14 +44,10 @@ var EPFCard = React.createClass({
   },
   render: function() {
       const title = (<h3>{this.props.title}</h3>);
-      const desc = (<p>{ this.props.description }</p>);
       return (
-          <div>
+          <div style={styles.card}>
             <Card>
-              <CardHeader
-                title={title}
-              />
-              <CardText>{desc}</CardText>
+              <CardText>{title}</CardText>
                 <CardActions>
                   <IconButton
                     tooltip="Edit Card"
@@ -64,7 +66,7 @@ var EPFCard = React.createClass({
             </CardActions>
           </Card>
           <Dialog
-            title="Create New Card"
+            title="Edit Card"
             modal={false}
             open={this.state.showDialog}
             onRequestClose={this.closeEdit}
