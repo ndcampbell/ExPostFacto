@@ -32,6 +32,7 @@ var NewCardForm = React.createClass({
         .then(function(result) {
             console.log(newCard)
             });
+    this.props.closeDialog()
   },
   render: function () {
       return(

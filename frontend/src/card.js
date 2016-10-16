@@ -74,6 +74,7 @@ var EPFCard = React.createClass({
               description={this.props.description}
               cardId={this.props.cardId}
               editCard={true}
+              closeDialog={this.closeEdit}
             />
           </Dialog>
         </div>
@@ -100,7 +101,7 @@ var Cards = React.createClass({
   },
   componentDidMount: function() {
     this.loadCardsFromServer();
-    setInterval(this.loadCardsFromServer, 2000);
+    setInterval(this.loadCardsFromServer, 500);
   },
   componentWillUnmount: function() {
     this.serverRequest.abort();

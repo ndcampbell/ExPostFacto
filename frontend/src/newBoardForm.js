@@ -21,6 +21,7 @@ var NewBoardForm = React.createClass({
         .then(function(result) {
             console.log(newBoard)
             });
+    this.props.closeDialog()
   },
   render: function () {
       return(

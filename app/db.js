@@ -53,7 +53,6 @@ var addBoard = function(boardData) {
 
 var getBoards = function() {
   var res = db.runSync("select * from boards");
-  console.log("boards", res)
   return res;
 }
 

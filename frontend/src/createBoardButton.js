@@ -18,7 +18,7 @@ var CreateBoardButton = React.createClass({
     getInitialState() {
       return { showDialog: false };
     },
-    close() {
+    close: function() {
       this.setState({ showDialog: false });
     },
     open() {
@@ -34,9 +34,9 @@ var CreateBoardButton = React.createClass({
                     title="Create New Board"
                     modal={false}
                     open={this.state.showDialog}
-                    onRequestClose={this.close}
+                    onRequestClose={this.closeDialog}
                     >
-                    <NewBoardForm />
+                    <NewBoardForm closeDialog={this.close}/>
                   </Dialog>
                 </div>
         );

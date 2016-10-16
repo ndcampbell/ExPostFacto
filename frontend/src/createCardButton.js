@@ -19,7 +19,7 @@ var CreateCardButton = React.createClass({
     getInitialState() {
       return { showDialog: false };
     },
-    close() {
+    close: function() {
       this.setState({ showDialog: false });
     },
     open() {
@@ -39,7 +39,9 @@ var CreateCardButton = React.createClass({
                     >
                     <NewCardForm
                         cardColumn={this.props.cardColumn}
-                        boardId={this.props.boardId}/>
+                        boardId={this.props.boardId}
+                        closeDialog={this.close}
+                    />
                   </Dialog>
                 </div>
         );
