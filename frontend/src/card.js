@@ -13,6 +13,13 @@ const styles = {
     card: {
         wordBreak: 'break-word',
     },
+    buttonDiv: {
+        width: '100%',
+    },
+    voteDiv: {
+        width: '50px',
+        margin: '0 auto'
+    }
 }
 
 var EPFCard = React.createClass({
@@ -49,20 +56,25 @@ var EPFCard = React.createClass({
             <Card>
               <CardText>{title}</CardText>
                 <CardActions>
-                  <IconButton
-                    tooltip="Edit Card"
-                    onClick={this.openEdit}
-                    >
-                    <ModeEdit />
-                  </IconButton>
-                  <VoteButton cardId={this.props.cardId}/>
-                  <IconButton
-                    onClick={this.onDelete}
-                    tooltip="Delete Card"
-                    style={{float: 'right'}}
-                    >
-                    <ActionDeleteForever />
-                  </IconButton>
+                  <div style={styles.buttonDiv}>
+                      <IconButton
+                        tooltip="Edit Card"
+                        onClick={this.openEdit}
+                        style={{float: 'left'}}
+                        >
+                        <ModeEdit />
+                      </IconButton>
+                      <IconButton
+                        onClick={this.onDelete}
+                        tooltip="Delete Card"
+                        style={{float: 'right'}}
+                        >
+                        <ActionDeleteForever />
+                      </IconButton>
+                      <div style={styles.voteDiv}>
+                          <VoteButton cardId={this.props.cardId}/>
+                      </div>
+                  </div>
             </CardActions>
           </Card>
           <Dialog

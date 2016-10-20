@@ -29,7 +29,7 @@ var HeaderBar = React.createClass({
   render: function() {
     return (
         <AppBar
-          title="ExPostFacto"
+          title={this.props.boardName ? "ExPostFacto - " + this.props.boardName : "ExPostFacto"}
           titleStyle={{textAlign: 'center'}}
           iconElementLeft={<HeaderMenu />}
         />

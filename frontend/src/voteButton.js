@@ -4,7 +4,6 @@ import ActionGrade from 'material-ui/svg-icons/action/grade';
 import {yellow700} from 'material-ui/styles/colors';
 import axios from 'axios';
 
-
 var VoteButton = React.createClass({
   getInitialState() {
       return { tooltip: "Vote",
@@ -40,7 +39,7 @@ var VoteButton = React.createClass({
       <IconButton
         tooltip={this.state.tooltip}
         onClick={this.toggleVote}
-      >
+          >
         <ActionGrade color={this.state.iconColor} />
       </IconButton>
     );

@@ -22,7 +22,7 @@ var CardGrid = React.createClass({
     }
     return (
       <div>
-        <HeaderBar />
+        <HeaderBar boardName={this.props.params.boardname}/>
         <div style={styles.divWrap}>
           <div style={styles.divLeft}>
             <center><h2>What went well?</h2></center>
