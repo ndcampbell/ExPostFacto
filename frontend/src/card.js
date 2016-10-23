@@ -11,14 +11,29 @@ import VoteButton from './voteButton.js';
 
 const styles = {
     card: {
-        wordBreak: 'break-word',
+        width: "45%",
+        height: "100%",
+        margin: "2%",
+        display: "inline-block",
+        verticalAlign: "top",
+        position: 'relative',
+        whiteSpace: 'pre-wrap',
     },
-    buttonDiv: {
-        width: '100%',
+    indCard: {
+        height: "200px"
+    },
+    cardActions: {
+        position: "absolute",
+        bottom: '0',
+        width: '100%'
     },
     voteDiv: {
         width: '50px',
         margin: '0 auto'
+    },
+    form: {
+        margin: '0 auto',
+        width: '30%'
     }
 }
 
@@ -53,10 +68,10 @@ var EPFCard = React.createClass({
       const title = (<h3>{this.props.title}</h3>);
       return (
           <div style={styles.card}>
-            <Card>
+            <Card style={styles.indCard}>
               <CardText>{title}</CardText>
-                <CardActions>
-                  <div style={styles.buttonDiv}>
+                <CardActions style={styles.cardActions}>
+                  <div>
                       <IconButton
                         tooltip="Edit Card"
                         onClick={this.openEdit}
@@ -78,6 +93,7 @@ var EPFCard = React.createClass({
             </CardActions>
           </Card>
           <Dialog
+            contentStyle={styles.form}
             title="Edit Card"
             modal={false}
             open={this.state.showDialog}
