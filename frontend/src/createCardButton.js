@@ -9,10 +9,14 @@ const styles = {
         textAlign: 'center',
         margin: '0 auto',
         //padding: '20px',
-        width: '480px',
+        width: '570px',
         bottom: '50px',
         position: 'fixed',
-      }
+    },
+    form: {
+        margin: '0 auto',
+        width: '30%'
+    }
 };
 
 var CreateCardButton = React.createClass({
@@ -32,6 +36,7 @@ var CreateCardButton = React.createClass({
                     <ContentAdd />
                   </FloatingActionButton>
                   <Dialog
+                    contentStyle={styles.form}
                     title="Create New Card"
                     modal={false}
                     open={this.state.showDialog}

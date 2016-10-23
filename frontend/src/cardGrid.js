@@ -8,16 +8,16 @@ var CardGrid = React.createClass({
   render: function() {
     const styles = {
       divWrap: {
-        width: '1000px',
+        width: '1200px',
         margin: '0 auto',
       },
       divLeft: {
         float: 'left',
-        width: '480px',
+        width: '580px',
       },
       divRight: {
         float: 'right',
-        width: '480px',
+        width: '580px',
       }
     }
     return (
