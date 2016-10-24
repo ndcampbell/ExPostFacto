@@ -137,8 +137,15 @@ var Cards = React.createClass({
     this.serverRequest.abort();
   },
   render: function () {
+    var showVotes = this.props.showVotes
     var cardMap = this.state.cardsData.map(function(card) {
-      return (<EPFCard key={card.id} cardId={card.id} title={card.title} description={card.description}/>);
+      return (<EPFCard
+                  key={card.id} 
+                  cardId={card.id}
+                  title={card.title}
+                  description={card.description}
+                  votes={card.votes}
+                  showVotes={showVotes}/>);
     });
     return (
       <div>
