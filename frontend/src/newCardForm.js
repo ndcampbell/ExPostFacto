@@ -24,7 +24,8 @@ var NewCardForm = React.createClass({
       newCard = { id: this.props.cardId,
           title: this.state.title, description: this.state.description };
     } else{
-      newCard = { boardid: this.props.boardId, title: this.state.title, description: this.state.description, columnid: this.props.cardColumn };
+      newCard = { boardid: this.props.boardId, title: this.state.title,
+          description: this.state.description, columnid: this.props.cardColumn, votes: 0 };
     }
     this.serverRequest =
       axios

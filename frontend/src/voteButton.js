@@ -1,5 +1,7 @@
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
+import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import {yellow700} from 'material-ui/styles/colors';
 import axios from 'axios';
@@ -35,14 +37,24 @@ var VoteButton = React.createClass({
             });
   },
   render: function () {
-    return (
-      <IconButton
-        tooltip={this.state.tooltip}
-        onClick={this.toggleVote}
-          >
-        <ActionGrade color={this.state.iconColor} />
-      </IconButton>
-    );
+    if (this.props.showVotes) {
+        return(
+            <Chip>
+              <Avatar size={32} color="#444" icon={<ActionGrade />}>
+              </Avatar>
+              {this.props.votes}
+            </Chip>
+        )
+    } else {
+        return (
+          <IconButton
+            tooltip={this.state.tooltip}
+            onClick={this.toggleVote}
+              >
+            <ActionGrade color={this.state.iconColor} />
+          </IconButton>
+        );
+    }
   }
 });
 

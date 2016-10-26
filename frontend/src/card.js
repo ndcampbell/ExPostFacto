@@ -87,7 +87,11 @@ var EPFCard = React.createClass({
                         <ActionDeleteForever />
                       </IconButton>
                       <div style={styles.voteDiv}>
-                          <VoteButton cardId={this.props.cardId}/>
+                          <VoteButton
+                              cardId={this.props.cardId}
+                              votes={this.props.votes}
+                              showVotes={this.props.showVotes}
+                          />
                       </div>
                   </div>
             </CardActions>
@@ -140,7 +144,7 @@ var Cards = React.createClass({
     var showVotes = this.props.showVotes
     var cardMap = this.state.cardsData.map(function(card) {
       return (<EPFCard
-                  key={card.id} 
+                  key={card.id}
                   cardId={card.id}
                   title={card.title}
                   description={card.description}
